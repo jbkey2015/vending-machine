@@ -1,17 +1,27 @@
-import './machine.scss';
 import smash from '../../helpers/data/smash';
+import utilities from '../../helpers/utilities';
 
+import snack from '../Snack/snack';
+import './machine.scss';
 
 const buildTheMachine = () => {
   smash.getCompleteMachine()
-    .then((singleMachine) => console.error('1 machine', singleMachine))
+    .then((positions) => {
+      // build a dom string - done
+      // h2 that says VENDING MACHINE - done
+      // div with an id = snack-section, class=d-flex flex-wrap - done
+      // forEach over positions - call a component called snacks - done
+      // snacks component should return a bootstrap card - done
+      // printToDom('stock', domString) - done
+      let domString = '<h2>VENDING MACHINE</h2>';
+      domString += '<div id="snack-section" class="d-flex flex-wrap">';
+      positions.forEach((position) => {
+        domString += snack.makeASnack(position);
+      });
+      domString += '</div>';
+      utilities.printToDom('stock', domString);
+    })
     .catch((error) => console.error(error));
-// 1. getMachines - returns first machine (hard coding)
-// 2. use MachineId to get all postions for that machine
-// 3. use MachineId to get all snack postions
-// 4. use uid of snack postions/positions to get availabe snacks for that position
-// 5. smash em - return an array of positions (in order A1, A2, A3, B1...).
-// so positions should have postion. snack if a snack exists at that position
 };
 
 export default { buildTheMachine };
